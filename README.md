@@ -49,6 +49,7 @@ Bu proje, kullanıcılara belirli anahtarlar (key) aracılığıyla özel linkle
 ## Geliştirici
 
 Bu proje **Webui** tarafından geliştirilmiştir.
+Telif hakkları alınmıştır.
 
 ---
 *Github'da yayınlanmaya uygundur.*
