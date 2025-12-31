@@ -13,9 +13,6 @@ SET time_zone = "+00:00";
 --
 -- Veritabanı: `key_system_db`
 --
--- Eğer veritabanı yoksa oluşturulmalıdır (hosting panelinden manuel oluşturmanız gerekebilir)
--- CREATE DATABASE IF NOT EXISTS `key_system_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
--- USE `key_system_db`;
 
 -- --------------------------------------------------------
 
@@ -51,13 +48,39 @@ CREATE TABLE IF NOT EXISTS `admins` (
 --
 -- Tablo döküm verisi: `admins`
 --
--- Varsayılan admin hesabı: Kullanıcı Adı: admin, Şifre: admin123
--- Şifre hash'i bcrypt ile oluşturulmuştur.
--- Eğer bu şifre çalışmazsa setup.php dosyasını çalıştırarak sıfırlayabilirsiniz.
 
 INSERT INTO `admins` (`id`, `username`, `password`, `created_at`) VALUES
 (1, 'admin', '$2y$10$uVc//dPMwKLE.b2afFl6cuk7cjRyPpVGYW/Sp3EQdcNLIUxpivF7e', '2025-01-01 00:00:00'); 
--- Not: Yukarıdaki hash örnektir, Lütfen hash kismini farklı birşey yapın yoksa admin panele başkaları giriş yapabilir.
+-- Şifre: admin123 (BCrypt Hash)
+
+-- --------------------------------------------------------
+
+--
+-- Tablo yapısı: `banned_ips`
+--
+
+CREATE TABLE IF NOT EXISTS `banned_ips` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip_address` varchar(45) NOT NULL,
+  `reason` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo yapısı: `key_logs`
+--
+
+CREATE TABLE IF NOT EXISTS `key_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key_code` varchar(255) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `user_agent` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -80,11 +103,13 @@ CREATE TABLE IF NOT EXISTS `settings` (
 INSERT IGNORE INTO `settings` (`setting_key`, `setting_value`) VALUES
 ('footer_text', 'Yapımcı <strong>Webui</strong>'),
 ('site_title', 'Webui Key System'),
-('site_desc', 'Gelişmiş key doğrulama ve yönlendirme sistemi.');
+('site_desc', 'Gelişmiş key doğrulama ve yönlendirme sistemi.'),
+('site_icon', ''),
+('maintenance_mode', '0'),
+('maintenance_message', 'Sistem şu anda bakım çalışması nedeniyle geçici olarak hizmet dışıdır. Lütfen daha sonra tekrar deneyiniz.');
 
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
