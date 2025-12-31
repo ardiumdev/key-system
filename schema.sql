@@ -56,9 +56,8 @@ CREATE TABLE IF NOT EXISTS `admins` (
 -- Eğer bu şifre çalışmazsa setup.php dosyasını çalıştırarak sıfırlayabilirsiniz.
 
 INSERT INTO `admins` (`id`, `username`, `password`, `created_at`) VALUES
-(1, 'admin', '$2y$10$8.1.1.1.1.1.1.1.1.1.1.X.X.X.X.X.X.X.X.X.X.X.X.X.X', '2025-01-01 00:00:00'); 
--- Not: Yukarıdaki hash örnektir, setup.php çalıştığında doğru hash oluşturulur.
--- setup.php çalıştırmanızı öneririz.
+(1, 'admin', '$2y$10$uVc//dPMwKLE.b2afFl6cuk7cjRyPpVGYW/Sp3EQdcNLIUxpivF7e', '2025-01-01 00:00:00'); 
+-- Not: Yukarıdaki hash örnektir, Lütfen hash kismini farklı birşey yapın yoksa admin panele başkaları giriş yapabilir.
 
 -- --------------------------------------------------------
 
@@ -88,3 +87,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
